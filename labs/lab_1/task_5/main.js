@@ -7,6 +7,7 @@ var button = document.querySelector("button");
 button.addEventListener("click", function() {
     while(true){
         num_input = prompt('Угадайте число');
+        if(isNaN(num_input)) continue;
         console.log(`Ваше число ${num_input}`);
         if(num_input > num_random){
             console.log('Ваше число больше');
