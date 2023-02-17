@@ -5,7 +5,7 @@ function getMultipleChars(char, count){
     }
     return result;
 }
-function BuildTreeText(){
+function BuildTreeText(tree_lenght){
     tree_text = '';
     for(i = 0; i < tree_lenght; i+=1){
         if (i%2) {
@@ -20,6 +20,6 @@ function BuildTreeText(){
 }
 var button = document.querySelector("button");
 button.addEventListener("click", function() {
-    tree_lenght = prompt('Длинна дерева'); // Длинна дерева
-    console.log(BuildTreeText());
+    num = prompt('Длинна дерева'); // Длинна дерева
+    console.log(BuildTreeText(num));
 });
