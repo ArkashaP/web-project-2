@@ -2,7 +2,7 @@ a = 3;
 b = 4;
 c = 6;
 
-if ((a+b<c) || (b+c<a) || (c+a<b)){
+if ((a+b<c) || (b+c<a) || (c+a<b)){ //Проверка
     console.log('Не существует');
 } else{
     console.log('Cуществует');
