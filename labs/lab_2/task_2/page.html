@@ -10,16 +10,9 @@
 <body>
     <a href="../lab.html">Back to Lab</a>
     <p>
-        <input id="inputNum" placeholder="Input" onchange="onSubmit()">
+        <input id="number" placeholder="Number">
+        <button onclick="onSubmit()">Run</button>
     </p>
-    <select id="speedConvType" onchange="onSubmit()">
-        <option value="KMHtoMS">km/h to m/s</option>
-        <option value="MStoKMH">m/s в km/h</option>
-    </select>
-    <p>
-        <input id="outputNum" placeholder="Output" readonly>
-    </p>
-    <button onclick="onSubmit()">Run</button>
     <script src="main.js"></script>
 </body>
 </html>

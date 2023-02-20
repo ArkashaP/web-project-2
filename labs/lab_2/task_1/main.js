@@ -1,4 +1,6 @@
-const button = document.querySelector("button");
+const speedType = document.getElementById('speedConvType')
+const inputNum = document.getElementById('inputNum')
+const outputNum = document.getElementById('outputNum')
 
 function convertSpeed(speedNum, speedType){
     switch(speedType){
@@ -6,13 +8,11 @@ function convertSpeed(speedNum, speedType){
             return speedNum * 1000 / 3600;
         case 'MStoKMH': 
             return speedNum / 1000 * 3600;
-            break;
         default:
-            return 'Реализации такого типа не существует';
+            return 'Error';
     }
-}
+};
 
-
-button.addEventListener("click", function() {
-    
-});
+function onSubmit(){
+    outputNum.value = convertSpeed(inputNum.value, speedType.value);
+};

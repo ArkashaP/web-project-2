@@ -17,3 +17,6 @@ p{
 html{
     background-color: var(--background-color);
 }
+li{
+    color: var(--text-color);
+}
