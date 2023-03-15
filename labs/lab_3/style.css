@@ -1,0 +1,95 @@
+:root{
+    --text-error-color: #ffb1b6;
+    --text-error-background-color: rgba(166, 0, 11, 0.65);
+}
+
+body{
+    margin: 0;
+}
+section{
+    margin: 0 2rem;
+}
+a{
+    color: #ffffff;
+    background-color: #5a5a5a;
+    border-radius: 2rem;
+    padding: 1rem;
+    margin-left: 2rem;
+}
+a:hover{
+    color: #5dc9ff;
+}
+header{
+    background-color: rgba(214, 214, 214, 0.534);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+.sign_button{
+    margin-left: auto;
+    margin-right: 1rem;
+}
+.sign_form{
+    transition: all 0.5s;
+    position: fixed;
+    width: max-content;
+    min-width: 40rem;
+    border-radius: 4rem;
+    padding: 3.5rem;
+    background-color: rgba(78, 68, 68, 0.859);
+    backdrop-filter: blur(2px);
+    
+    border-style: double;
+    border-width: 0.5rem;
+    
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top:  50%;
+}
+
+.sign_form_hidden{
+    backdrop-filter: blur(0px);
+    opacity: 0;
+    padding: 1.5rem;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}
+.sign_form fieldset{
+    padding: 1rem;
+    width: 80%;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sign_form fieldset:first{
+    padding: 3.5rem;
+}
+.sign_form fieldset div{
+    display: flex;
+    justify-content: space-around;
+}
+
+.sign_form button{
+    margin-top: 1.5rem;
+}
+.sign_form button{
+    margin: 0;
+}
+.form_error{
+    max-width: 30rem;
+    width: fit-content;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--text-error-background-color);
+    color: var(--text-error-color);
+    font-weight: 700;
+}
+input{
+    width: max-content;
+}

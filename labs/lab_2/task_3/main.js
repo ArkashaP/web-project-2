@@ -14,13 +14,9 @@ function onSubmit() {
         lastName: lastName.value,
         group: group.value
     };
-    let first_row = '';
-    for (key in student) {
-        first_row += ' ' + key;
-    }
     
     document.body.insertAdjacentHTML('beforeEnd', 
-        `<p>Список свойств:${first_row}</p>
+        `<p>Список свойств:${Object.keys(student)}</p>
         <p>Студент ${student.firstName} ${student.lastName} учится в ${student.group} группе</p>`
     );
     resetInputs();
