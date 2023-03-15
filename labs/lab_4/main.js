@@ -1,78 +1,131 @@
-const bSign = document.getElementById('sign_butt')
-const fSign = document.getElementById('sign_form')
-const bCancel = document.getElementById('cancel_butt')
-const bLogin = document.getElementById('login_butt')
-const bShowPass = document.getElementById('show_pass_butt')
-const iPass = document.getElementById('pass_input')
-const iEmail = document.getElementById('email_input')
+import * as THREE from "https://unpkg.com/three/build/three.module.js";
+import { default as Stats } from "https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js";
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+const clock = new THREE.Clock();
+let scene = new THREE.Scene();
+
+const stats = Stats();
+document.body.appendChild(stats.dom);
+
+let vertices = [0, 0, 0, 10, 0, 0, 10, 0, 10, 0, 0, 10];
+
+let indices = [2, 1, 0, 0, 3, 2];
+
+let cameraTarget = new THREE.Vector3(0, 0.4, 0);
+
+let geometry = new THREE.BufferGeometry();
+
+geometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(new Float32Array(vertices), 3)
+);
+geometry.setIndex(indices);
+geometry.computeVertexNormals();
+
+let material = new THREE.MeshPhongMaterial({ color: 0xaaaaaa });
+
+let mesh = new THREE.Mesh(geometry, material);
+mesh.position.set(-5, 0, -5);
+
+const spotLight = new THREE.SpotLight("#ffffff");
+spotLight.position.set(0, 1, 5);
+spotLight.castShadow = true;
+spotLight.intensity = 2;
+spotLight.shadow.camera.near = 1;
+spotLight.shadow.camera.far = 25;
+spotLight.shadow.mapSize.width = 2048;
+spotLight.shadow.mapSize.height = 2048;
+spotLight.shadow.bias = -0.01;
+spotLight.target.position.set(0, 0, 0);
+
+const spotLightHelper = new THREE.SpotLightHelper(spotLight);
+scene.add(spotLight);
+scene.add(spotLight.target);
+scene.add(spotLightHelper);
+
+
+
+const spotLightL = new THREE.SpotLight("#ffffff");
+spotLightL.position.set(-5, 1, 0);
+spotLightL.castShadow = true;
+spotLightL.intensity = 2;
+spotLightL.shadow.camera.near = 1;
+spotLightL.shadow.camera.far = 25;
+spotLightL.shadow.mapSize.width = 2048;
+spotLightL.shadow.mapSize.height = 2048;
+spotLightL.shadow.bias = -0.01;
+spotLightL.target.position.set(0, 0, 0);
+
+const spotLightLHelper = new THREE.SpotLightHelper(spotLightL);
+scene.add(spotLightL);
+scene.add(spotLightL.target);
+scene.add(spotLightLHelper);
+
+
+const spotLightR = new THREE.SpotLight("#ffffff");
+spotLightR.position.set(5, 1, 0);
+spotLightR.castShadow = true;
+spotLightR.intensity = 2;
+spotLightR.shadow.camera.near = 1;
+spotLightR.shadow.camera.far = 25;
+spotLightR.shadow.mapSize.width = 2048;
+spotLightR.shadow.mapSize.height = 2048;
+spotLightR.shadow.bias = -0.01;
+spotLightR.target.position.set(0, 0, 0);
+
+const spotLightRHelper = new THREE.SpotLightHelper(spotLightR);
+scene.add(spotLightR);
+scene.add(spotLightR.target);
+scene.add(spotLightRHelper);
+
+// const spotLightR = new THREE.SpotLight("#ffffff");
+// spotLightR.position.set(0, 1, 5);
+// spotLightR.castShadow = true;
+// spotLightR.intensity = 2;
+// spotLightR.shadow.camera.near = 1;
+// spotLightR.shadow.camera.far = 25;
+// spotLightR.shadow.mapSize.width = 2048;
+// spotLightR.shadow.mapSize.height = 2048;
+// spotLightR.shadow.bias = -0.01;
+// spotLightR.target.position.set(0, 0, 0);
+
+scene.add(mesh);
+
+const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 16);
+const sphereMaterial = new THREE.MeshPhongMaterial({ color: 0xffff00 });
+const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+sphere.position.y = 1;
+scene.add(sphere);
+
+let camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+camera.position.set(0, 1, 5);
+// camera.position.z = 5;
+// camera.position.y = 1;
+
+let renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  stats.update();
+  //spotLightHelper.update();
+
+  const elapsedTime = clock.getElapsedTime();
+
+  camera.position.x = Math.cos(elapsedTime * 0.6) * 2;
+  camera.position.y = Math.sin(elapsedTime * 0.6 *3.14) + 3.14/2;
+//   camera.position.z = Math.sin(elapsedTime * 0.6) * 2;
+
+  camera.lookAt(cameraTarget);
+
+  renderer.render(scene, camera);
 }
 
-async function toggleSignForm(){
-    if(fSign.hidden){ 
-        // Показываем
-        fSign.hidden=false
-        // Добавляем и удаляем класс чтобы проигралась анимация 
-        //(sleep тоже нужен)
-        fSign.classList.add('sign_form_hidden')
-        await sleep(10);
-        fSign.classList.remove('sign_form_hidden')
-        console.log('unhidden r n')
-    }
-    else{ 
-        // Прячем
-        fSign.classList.add('sign_form_hidden')
-        await sleep(500); // Ждем 500 мс так как transition 0,5s
-        fSign.hidden=true
-    }
-}
-
-bCancel.addEventListener('click', toggleSignForm);
-bSign.addEventListener('click', toggleSignForm);
-
-bShowPass.addEventListener('pointerdown', ()=>{
-    iPass.setAttribute('type', 'text')
-    bShowPass.innerText = 'Скрыть пароль'
-});
-bShowPass.addEventListener('pointerup', ()=>{
-    iPass.setAttribute('type', 'password')
-    bShowPass.innerText = 'Показать пароль'
-});
-bLogin.addEventListener('click', (e)=>{
-    e.preventDefault();
-    validateForm();
-})
-
-function validateForm(){
-    iError.hidden = true;
-    
-    if(iPass.value.length < 6){
-        //Поставить текст об ошибке в iError
-        iError.hidden = false;
-        iError.innerText = 'Пароль должен быть не менее 6 символов';
-        return;
-    } 
-
-    //Проверить переменную iPass на наличие русских букв
-    if(iPass.value.match(/[а-я]/)){
-        iError.hidden = false;
-        iError.innerText = 'Пароль должен не должен содержать русские буквы';
-        return;
-    }
-    
-    //Проверить переменную iEmail на наличие адреса
-    if(!iEmail.value.match(/[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
-        iError.hidden = false;
-        iError.innerText = 'Почта должен содержать адрес электронной почты';
-        return;
-    }
-
-    //Собрать данные с формы и в консоль
-    const data = {
-        email: iEmail.value,
-        password: iPass.value
-    }
-    console.log(data);
-}
+animate();

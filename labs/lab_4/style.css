@@ -17,9 +17,21 @@ header{
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
 }
+a{
+    color: #ffffff;
+    background-color: #5a5a5a;
+    border-radius: 2rem;
+    padding: 1rem;
+    margin-left: 2rem;
+    transition: 0.2s;
+}
+a:hover{
+    color: #5dc9ff;
+}
 .sign_button{
     margin-left: auto;
     margin-right: 1rem;
+    transition: 0.2;
 }
 .sign_form{
     transition: all 0.5s;
