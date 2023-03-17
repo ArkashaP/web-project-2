@@ -19,7 +19,6 @@ async function toggleSignForm(){
         fSign.classList.add('sign_form_hidden')
         await sleep(10);
         fSign.classList.remove('sign_form_hidden')
-        console.log('unhidden r n')
     }
     else{ 
         // Прячем
@@ -40,6 +39,8 @@ bShowPass.addEventListener('pointerup', ()=>{
     iPass.setAttribute('type', 'password')
     bShowPass.innerText = 'Показать пароль'
 });
+
+
 bLogin.addEventListener('click', (e)=>{
     e.preventDefault();
     validateForm();
@@ -76,3 +77,6 @@ function validateForm(){
     }
     console.log(data);
 }
+
+iPass.addEventListener('blur', validateForm())
+iEmail.addEventListener('blur', validateForm())

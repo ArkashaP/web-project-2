@@ -55,8 +55,6 @@ header{
     opacity: 0;
     padding: 1.5rem;
     position: fixed;
-    left: 50%;
-    top: 50%;
 }
 .sign_form fieldset{
     padding: 1rem;
