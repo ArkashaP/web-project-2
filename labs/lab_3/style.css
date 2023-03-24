@@ -78,15 +78,21 @@ header{
     margin: 0;
 }
 .form_error{
+    transition: all 0.5s;
     max-width: 30rem;
     width: fit-content;
+    min-height: 3rem;
     border-radius: 1rem;
     padding: 1rem;
     margin-left: auto;
     margin-right: auto;
     background-color: var(--text-error-background-color);
     color: var(--text-error-color);
+    
     font-weight: 700;
+}
+.form_error_hidden{
+    opacity: 0;
 }
 input{
     width: max-content;

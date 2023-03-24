@@ -1,0 +1,15 @@
+{
+  "name": "lab_5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "node test.js",
+    "serve": "nodemon server.js"
+  },
+  "author": "Ark",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.21"
+  }
+}

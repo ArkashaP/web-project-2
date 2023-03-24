@@ -13,30 +13,28 @@
         <a href="/..">Назад</a>
         <button class="sign_button" id="sign_butt">Регистрация</button>
     </header>
-    <form class="sign_form" id="sign_form">
+    <form  class="sign_form sign_form_hidden" id="sign_form" hidden>
         <fieldset>
             <legend>Регистрация</legend>
             <fieldset>
-                <label>
+                <label for="email">
                     Email:
-                    <input id="email_input" type="email" required>
+                    <input name="email" id="email_input" type="email" required>
                 </label>
             </fieldset>
             <fieldset>
-                <label>
+                <labe for="password">
                     Пароль:
-                    <input id="pass_input" type="password" minlength="6" maxlength="32" placeholder="от 6 до 32 символов" required>
+                    <input name="password" id="pass_input" type="password" minlength="6" maxlength="32" placeholder="от 6 до 32 символов" required>
                     <button type="button" id="show_pass_butt">Показать пароль</button>
                 </label>
             </fieldset>
             <div>
                 <button type="button" id="cancel_butt">Cancel</button>
-                <button id="login_butt">Login</button>
+                <button type="submit" id="login_butt">Login</button>
             </div>
             
-            <p class="form_error" id="iError" hidden>
-                Минимальная длинна пароля - 6 символов!
-            </p>
+            <p class="form_error form_error_hidden" id="iError" ></p>
         </fieldset>
     </form>
     <section>

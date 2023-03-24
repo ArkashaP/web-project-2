@@ -8,11 +8,8 @@ const stats = Stats();
 document.body.appendChild(stats.dom);
 
 let vertices = [0, 0, 0, 10, 0, 0, 10, 0, 10, 0, 0, 10];
-
 let indices = [2, 1, 0, 0, 3, 2];
-
 let cameraTarget = new THREE.Vector3(0, 0.4, 0);
-
 let geometry = new THREE.BufferGeometry();
 
 geometry.setAttribute(
@@ -21,24 +18,34 @@ geometry.setAttribute(
 );
 geometry.setIndex(indices);
 geometry.computeVertexNormals();
+let material = new THREE.MeshPhongMaterial({ color: 0xaaaaaa });
+let mesh = new THREE.Mesh(geometry, material);
+mesh.position.set(-5, 0, -5);
+mesh.receiveShadow = true;
+scene.add(mesh);
+
+let len = 1;
+let vert_arr = [0, 0, 0, 0, 0, len, (Math.sqrt(3)*len/2), 0, len/2, (Math.sqrt(3)*len/6), len, len/2];
+indices = [0, 1, 2, 0, 1, 3, 1, 2, 3, 0, 2, 3];
+let myMesh = new THREE.BufferGeometry();
+myMesh.setAttribute("position", new THREE.BufferAttribute(new Float32Array(vert_arr), 3));
+myMesh.setIndex(indices);
+myMesh.computeVertexNormals();
+let matTetraider = new THREE.MeshPhongMaterial({ color: 'aqua', side: THREE.DoubleSide });
+let tetraider = new THREE.Mesh(myMesh, matTetraider);
+tetraider.position.set(-1, 0, -0.5);
+tetraider.castShadow = true;
+tetraider.receiveShadow = true;
+scene.add(tetraider);
 
 
-
-
-const plane = new THREE.Mesh(
-  new THREE.PlaneGeometry(4000, 4000),
-  new THREE.MeshPhongMaterial({ color: 0x808080, dithering: true })
-);
-plane.rotation.x = - Math.PI / 2;
-plane.receiveShadow = true;
-scene.add(plane);
 
 
 const spotLight = new THREE.SpotLight("#ffffff");
 spotLight.position.set(0, 2, 5);
 spotLight.castShadow = true;
 spotLight.intensity = 2;
-spotLight.shadow.camera.near = 0.1;
+spotLight.shadow.camera.near = 1;
 spotLight.shadow.camera.far = 25;
 spotLight.shadow.mapSize.width = 2048;
 spotLight.shadow.mapSize.height = 2048;
@@ -52,57 +59,48 @@ scene.add(spotLightHelper);
 
 
 
-const spotLightL = new THREE.SpotLight("#ffffff");
-spotLightL.position.set(-5, 1, 0);
-spotLightL.castShadow = true;
-spotLightL.intensity = 1
-spotLightL.shadow.camera.near = 1;
-spotLightL.shadow.camera.far = 25;
-spotLightL.shadow.mapSize.width = 2048;
-spotLightL.shadow.mapSize.height = 2048;
-spotLightL.shadow.bias = -0.01;
-spotLightL.target.position.set(0, 0, 0);
+const directionalLightL = new THREE.DirectionalLight("#ffffff");
+directionalLightL.position.set(-5, 1, -3);
+directionalLightL.castShadow = true;
+directionalLightL.intensity = 2
+directionalLightL.shadow.camera.near = 1;
+directionalLightL.shadow.camera.far = 25;
+directionalLightL.shadow.mapSize.width = 2048;
+directionalLightL.shadow.mapSize.height = 2048;
+directionalLightL.shadow.bias = -0.01;
+directionalLightL.target.position.set(0, 0, 0);
 
-const spotLightLHelper = new THREE.SpotLightHelper(spotLightL);
-scene.add(spotLightL);
-scene.add(spotLightL.target);
-scene.add(spotLightLHelper);
+const directionalLightLHelper = new THREE.DirectionalLightHelper(directionalLightL);
+scene.add(directionalLightL);
+scene.add(directionalLightL.target);
+scene.add(directionalLightLHelper);
 
 
-const spotLightR = new THREE.SpotLight("#ffffff");
-spotLightR.position.set(5, 1, 0);
-spotLightR.castShadow = true;
-spotLightR.intensity = 0
-spotLightR.shadow.camera.near = 1;
-spotLightR.shadow.camera.far = 25;
-spotLightR.shadow.mapSize.width = 2048;
-spotLightR.shadow.mapSize.height = 2048;
-spotLightR.shadow.bias = -0.01;
-spotLightR.target.position.set(0, 0, 0);
+const directionalLightR = new THREE.DirectionalLight("#ffffff");
+directionalLightR.position.set(5, 1, -3);
+directionalLightR.castShadow = true;
+directionalLightR.intensity = 2
+directionalLightR.shadow.camera.near = 1;
+directionalLightR.shadow.camera.far = 25;
+directionalLightR.shadow.mapSize.width = 2048;
+directionalLightR.shadow.mapSize.height = 2048;
+directionalLightR.shadow.bias = -0.01;
+directionalLightR.target.position.set(0, 0, 0);
 
-const spotLightRHelper = new THREE.SpotLightHelper(spotLightR);
-scene.add(spotLightR);
-scene.add(spotLightR.target);
-scene.add(spotLightRHelper);
-
-// const spotLightR = new THREE.SpotLight("#ffffff");
-// spotLightR.position.set(0, 1, 5);
-// spotLightR.castShadow = true;
-// spotLightR.intensity = 2;
-// spotLightR.shadow.camera.near = 1;
-// spotLightR.shadow.camera.far = 25;
-// spotLightR.shadow.mapSize.width = 2048;
-// spotLightR.shadow.mapSize.height = 2048;
-// spotLightR.shadow.bias = -0.01;
-// spotLightR.target.position.set(0, 0, 0);
+const directionalLightRHelper = new THREE.DirectionalLightHelper(directionalLightR);
+scene.add(directionalLightR);
+scene.add(directionalLightR.target);
+scene.add(directionalLightRHelper);
 
 
 const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 16);
 const sphereMaterial = new THREE.MeshPhongMaterial({ color: 0xffff00 });
 const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 sphere.position.y = 0.5;
+sphere.position.x = 0.5;
+sphere.receiveShadow = true;
+sphere.castShadow = true;
 scene.add(sphere);
-
 let camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -189,3 +187,25 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
+
+document.forms[0].addEventListener("change", (event) => {
+  if(event.target.name=="color1"){
+    sphereMaterial.color.set(event.target.value);
+  }
+  if(event.target.name=="color2"){
+    matTetraider.color.set(event.target.value);
+  }
+
+  if(event.target.name=="leftLight"){
+    // toggle directional light
+    directionalLightL.intensity = event.target.checked ? 2 : 0;
+  }
+  if(event.target.name=="centerLight"){
+    // toggle directional light
+    spotLight.intensity = event.target.checked ? 2 : 0;
+  }
+  if(event.target.name=="rightLight"){
+    // toggle directional light
+    directionalLightR.intensity = event.target.checked ? 2 : 0;
+  }
+})
