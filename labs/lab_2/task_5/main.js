@@ -22,6 +22,8 @@ function getRandArray(array, amount) {
 
 let numArray = [];
 
+numArray['']
+
 function delElement(){
     if(numArray.length<=0) return;
     numArray.pop();
