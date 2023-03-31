@@ -19,10 +19,18 @@ geometry.setAttribute(
 geometry.setIndex(indices);
 geometry.computeVertexNormals();
 let material = new THREE.MeshPhongMaterial({ color: 0xaaaaaa });
-let mesh = new THREE.Mesh(geometry, material);
-mesh.position.set(-5, 0, -5);
-mesh.receiveShadow = true;
-scene.add(mesh);
+let floor = new THREE.Mesh(geometry, material);
+floor.position.set(-5, 0, -5);
+floor.receiveShadow = true;
+scene.add(floor);
+
+let wall = new THREE.Mesh(geometry, material);
+wall.position.set(-5, 7,-3);
+wall.rotation.set(1.570796 , 0, 0);
+
+
+wall.receiveShadow = true;
+scene.add(wall);
 
 let len = 1;
 let vert_arr = [0, 0, 0, 0, 0, len, (Math.sqrt(3)*len/2), 0, len/2, (Math.sqrt(3)*len/6), len, len/2];
@@ -191,19 +199,18 @@ function clamp(value, min, max) {
 document.forms[0].addEventListener("change", (event) => {
   if(event.target.name=="color1"){
     sphereMaterial.color.set(event.target.value);
-  }
+  }else
   if(event.target.name=="color2"){
     matTetraider.color.set(event.target.value);
-  }
-
+  }else
   if(event.target.name=="leftLight"){
     // toggle directional light
     directionalLightL.intensity = event.target.checked ? 2 : 0;
-  }
+  }else
   if(event.target.name=="centerLight"){
     // toggle directional light
     spotLight.intensity = event.target.checked ? 2 : 0;
-  }
+  }else
   if(event.target.name=="rightLight"){
     // toggle directional light
     directionalLightR.intensity = event.target.checked ? 2 : 0;
