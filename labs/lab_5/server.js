@@ -29,7 +29,7 @@ const server = http.createServer();
 
 server.on('request', (req, res) => {
   res.statusCode = 200
-  if(req.url === '/favicon.ico') { // skip favicon requests
+  if (req.url === '/favicon.ico') { // skip favicon requests
     // res.writeHead(200, {'Content-Type': 'image/x-icon'} );
     // send image
     res.setHeader('Content-Type', 'image/x-icon')
@@ -38,14 +38,12 @@ server.on('request', (req, res) => {
     return;
   }
   tableRows.push([tableRows.length, req.headers['user-agent'], req.method, req.url]);
-  // 
-    if (req.url === '/comments') {
-      if (req.method === 'GET') {
+  if (req.url === '/comments') {
+    if (req.method === 'GET') {
       res.setHeader('Content-Type', 'application/json')
       res.end(JSON.stringify(comments))
     }
     else if (req.method === 'POST') {
-      console.log(req)
       let body = '';
       req.on('data', (chunk) => {
         body += chunk
@@ -71,8 +69,8 @@ server.on('request', (req, res) => {
         body += chunk
       })
       req.on('end', () => {
-        res.setHeader('Content-Type', 'text/html')
-        res.end('but nothing happend')
+        res.setHeader('Content-Type', 'text/plain')
+        res.end('Error! No post functions available')
       })
     }
   }
@@ -86,8 +84,8 @@ server.on('request', (req, res) => {
     res.end('400 Bad Request\n')
   }
 })
+
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`)
   console.log(`Started at ${new Date()}`)
-
 })

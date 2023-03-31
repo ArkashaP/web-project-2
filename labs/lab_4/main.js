@@ -157,11 +157,11 @@ animate();
 // }, 2000);
 
 // Create an event listener for the window resize event
-window.addEventListener("resize", () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
+// window.addEventListener("resize", () => {
+//   camera.aspect = window.innerWidth / window.innerHeight;
+//   camera.updateProjectionMatrix();
+//   renderer.setSize(window.innerWidth, window.innerHeight);
+// });
 
 let CamAngle=0;
 let CamHeight=0;
