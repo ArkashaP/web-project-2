@@ -22,7 +22,6 @@ function generateHTMLTable(array) {
   }
   html += '</table>\n'
   return html
-
 }
 
 const server = http.createServer();
@@ -30,21 +29,23 @@ const server = http.createServer();
 
 server.on('request', (req, res) => {
   res.statusCode = 200
-  if (req.url === '/favicon.ico') { // skip favicon requests
+  if(req.url === '/favicon.ico') { // skip favicon requests
+    // res.writeHead(200, {'Content-Type': 'image/x-icon'} );
+    // send image
     res.setHeader('Content-Type', 'image/x-icon')
     res.end();
 
     return;
   }
   tableRows.push([tableRows.length, req.headers['user-agent'], req.method, req.url]);
-  console.log(`Requested URL: ${req.url}`)
-
-  if (req.url === '/comments') {
-    if (req.method === 'GET') {
+  // 
+    if (req.url === '/comments') {
+      if (req.method === 'GET') {
       res.setHeader('Content-Type', 'application/json')
       res.end(JSON.stringify(comments))
     }
     else if (req.method === 'POST') {
+      console.log(req)
       let body = '';
       req.on('data', (chunk) => {
         body += chunk
