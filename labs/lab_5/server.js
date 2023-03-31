@@ -22,14 +22,12 @@ function generateHTMLTable(array) {
   }
   html += '</table>\n'
   return html
-
 }
 
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200
   if(req.url === '/favicon.ico') { // skip favicon requests
-    
     // res.writeHead(200, {'Content-Type': 'image/x-icon'} );
     // send image
     res.setHeader('Content-Type', 'image/x-icon')
@@ -40,7 +38,7 @@ const server = http.createServer((req, res) => {
   }
   console.log(`Requested URL: ${req.url}`)
   tableRows.push([tableRows.length, req.headers['user-agent'], req.method, req.url]);
-  
+  // 
     if (req.url === '/comments') {
       if (req.method === 'GET') {
       res.setHeader('Content-Type', 'application/json')
