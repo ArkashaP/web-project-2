@@ -29,7 +29,7 @@ const server = http.createServer();
 
 server.on('request', (req, res) => {
   res.statusCode = 200
-  if (req.url === '/favicon.ico') { // skip favicon requests
+   if (req.url === '/favicon.ico') { // skip favicon requests
     // res.writeHead(200, {'Content-Type': 'image/x-icon'} );
     // send image
     res.setHeader('Content-Type', 'image/x-icon')
@@ -70,7 +70,7 @@ server.on('request', (req, res) => {
       })
       req.on('end', () => {
         res.setHeader('Content-Type', 'text/plain')
-        res.end('Error! No post functions available')
+        res.end('Error! No POST functions available')
       })
     }
   }

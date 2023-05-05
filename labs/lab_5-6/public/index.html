@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="awsm-gondola.css">
+    <title>Информация</title>
+</head>
+<body>
+    <h2>Информация о сайте</h2>
+    <section>
+        <h3>Ключ API</h3>
+        <p>"api_key=96012345960"</p>
+        <p>Применение:</p>
+        <a href="/debug?api_key=96012345960">/debug?api_key=96012345960</a>
+    </section>
+    <section>
+        <h3>Пути.</h3>
+        <table>
+            <tr>
+                <td>
+                    Путь
+                </td>
+                <td>
+                    Метод
+                </td>
+                <td>
+                    Входные данные
+                </td>
+                <td>
+                    Возврат
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    /
+                </td>
+                <td>
+                    GET (+внутренние)
+                </td>
+                <td>
+                    -
+                </td>
+                <td>
+                    Основная страница сайта (Информация)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    /debug/
+                </td>
+                <td>
+                    GET
+                </td>
+                <td>
+                    -
+                </td>
+                <td>
+                    "Hello world!"
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    /debug/comments
+                </td>
+                <td>
+                    GET/POST
+                </td>
+                <td>
+                    "Коментарий" (plain text)
+                </td>
+                <td>
+                    Массив строк содержащих в себе "Комментарии"
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    /debug/stats
+                </td>
+                <td>
+                    GET
+                </td>
+                <td>
+                    -
+                </td>
+                <td>
+                    Статистику по всем запросом в виде HTML таблицы
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Любые остальные
+                </td>
+                <td>
+                    *
+                </td>
+                <td>
+                    *
+                </td>
+                <td>
+                    Ошибка "400 Bad Request"
+                </td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <h3></h3>
+    </section>
+    <script src="main.js"></script>
+</body>
+</html>
