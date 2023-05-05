@@ -32,6 +32,8 @@ app.use((req, res, next) => {
 })
 
 
+// TODO: CRUD for models
+
 app.use(express.json())
 app.use('/api', router)
 app.use('/comments', routerDB)
