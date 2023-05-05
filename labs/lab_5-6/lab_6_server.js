@@ -34,19 +34,22 @@ function generateHTMLTable(array) {
 app.use(morgan('common'))
 app.use(favicon(__dirname + '/public/imgs/favicon.ico'));
 app.use(express.static(__dirname + '/public'))
+
 app.use(helmet())
 app.disable('x-powered-by');
+
 app.use(function (req, res, next) { // log every request
   tableRows.push([tableRows.length, req.headers['user-agent'], req.method, req.url]);
   next();
 })
 
+
 app.use((req, res, next) => {
   if(req.query.api_key == '96012345960'){
     next();
   }else{
-    res.status(404);
-    res.send('Forbidden');
+    res.status(403);
+    res.send('403 Forbidden');
   }
 })
 
