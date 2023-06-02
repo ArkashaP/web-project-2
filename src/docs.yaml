@@ -1,0 +1,95 @@
+paths:
+  /comments?api_key=96012345960:
+    get:
+      tags: [Comments]
+      description: Some description
+      summary: return all comments
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful
+        500:
+          description: Error
+    post:
+      tags: [ Comments ]
+      description: Some POST description
+      summary: return all comments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              comment:
+                type: string
+            example:
+              comment: ITS A TEST STRING
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful
+        500:
+          description: Error
+  /comments/{id}?api_key=96012345960:
+    put:
+      tags: [ Comments ]
+      description: Some PUT description
+      summary: return all comments
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: id from PATHHH!!!
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              comment:
+                type: string
+            example:
+              comment: ITS A TEST STRING
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful
+        500:
+          description: Error
+    get:
+      tags: [ Comments ]
+      description: Some GET description
+      summary: return all comments
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: id from PATHHH!!!
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful
+        500:
+          description: Error
+    delete:
+      tags: [ Comments ]
+      description: Some DELETE description
+      summary: return all comments
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: id from PATHHH!!!
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful
+        500:
+          description: Error
+          #Add security for api_key
