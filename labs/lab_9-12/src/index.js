@@ -10,7 +10,8 @@ const express = require('express'),
 const service = require('./services/service')
 const router = require('./routes/api.routes')
 const routerCommentsDB = require('./routes/db.comments.routes')
-//const routerUsersDB = require('./routes/db.users.routes')
+const routerUsersDB = require('./routes/db.users.routes')
+const routerModelsDB = require('./routes/db.models.routes')
 const swaggerUI = require('swagger-ui-express')
 
 const swaggerJSDoc=require('swagger-jsdoc');
@@ -63,22 +64,23 @@ app.use(function (req, res, next) { // log every request
 })
 
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   if(req.query.api_key == '96012345960'){
     next();
   }else{
     res.status(403);
     res.send('403 Forbidden');
   }
-})
+})*/
 
 
 // TODO: CRUD for models
 
 app.use(express.json())
-//app.use('/api', router)
+// app.use('/api', router)
 app.use('/api/comments', routerCommentsDB);
-//app.use('/api/users', routerUsersDB);
+app.use('/api/users', routerUsersDB);
+app.use('/api/models', routerModelsDB);
 
 
 

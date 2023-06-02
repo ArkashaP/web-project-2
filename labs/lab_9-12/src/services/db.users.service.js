@@ -25,13 +25,24 @@ class DbUsersService {
     }
 
     async findOne(collectionName, query){
-
+        console.log({query});
         return await db.collection(collectionName).findOne({_id: new objId(query)}).catch(error=>{
             console.log(error);
         });
         // return await db.collection(collectionName).findOne(query).catch(error=>{
         //     console.log(error);
         // });
+    }
+    async findWithName(collectionName, name){
+        return await db.collection(collectionName).findOne({name}, {projection:{token:1}}).catch(error=>{
+            console.log(error);
+        });
+    }
+    // !!! Не самое лучшее название для метода !!!
+    async findWithToken(collectionName, token){
+        return await db.collection(collectionName).findOne({token}, {projection:{name:1}}).catch(error=>{
+            console.log(error);
+        });
     }
 
     async insert(collectionName, data){

@@ -6,7 +6,11 @@ const controller = require('../controllers/db.users.controller')
 router.get('/ping', controller.ping)
 
 router.get('/', controller.getUsers)
-router.post('/', controller.postUser)
+router.post('/', controller.validateInput, controller.postUser)
+
+// TODO: Secure, input (name, token) checks and create middlewares (for checks and etc)
+router.get('/name/:name', controller.getUserByName);
+router.get('/token/:token', controller.getUserByToken);
 
 router.get('/:id', controller.getUser)
 router.put('/:id', controller.updateUser)

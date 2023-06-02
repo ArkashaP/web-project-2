@@ -10,7 +10,15 @@ class Controller{
 
         res.send(comments);
     }
-
+    async validateInput(req,res,next){
+        const {comment} = req.body
+        if(comment == undefined || comment == ''){
+            return res.status(400).json({ error: 'Invalid input' })
+        }
+        else{
+            next()
+        }
+    }
     async postComment(req, res) {
         // const {comment, id} = req.body
 
