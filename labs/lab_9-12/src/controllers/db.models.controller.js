@@ -10,10 +10,12 @@ class ControllerDB{
     }
 
     async postModel(req, res, next) {
-        // const {comment, id} = req.body
+        // const {comment, id} = req.
+        
+        
         const {name} = await dbUsersService.findWithToken('Users', req.header('api_key')).catch(error=>{
             console.log(error);
-            next();
+            next(error);
         });
         console.log(name)
 

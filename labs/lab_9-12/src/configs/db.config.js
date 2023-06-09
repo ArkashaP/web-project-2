@@ -15,7 +15,7 @@ class DBConfig{
             );
             await client.connect();
             console.log('Connected to DB!!!!!!');
-            const db = client.db('Test');
+            const db = client.db('Web-Project-2');
             return db;
         }
         catch (error){

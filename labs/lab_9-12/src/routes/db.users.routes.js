@@ -1,13 +1,13 @@
 const Router = require('express');
 const router = new Router();
 const controller = require('../controllers/db.users.controller')
-const userExistenceMiddleware = require('../middlewares/api.checkUser.middleware')
+const userMiddleware = require('../middlewares/api.userCheck.middleware')
 
 
-router.get('/ping', controller.ping)
+router.get('/ping', controller.ping) 
 
 router.get('/', controller.getUsers)
-router.post('/', controller.validateInput, userExistenceMiddleware.checkName, controller.postUser)
+router.post('/', controller.validateInput, userMiddleware.checkNameExistence, controller.postUser)
 
 // TODO: Secure, input (name, token) checks and create middlewares (for checks and etc)
 router.get('/name/:name', controller.getUserByName);
