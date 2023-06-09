@@ -11,8 +11,7 @@ class ControllerDB{
 
     async postModel(req, res, next) {
         // const {comment, id} = req.body
-        // TODO: Check if this name exists
-        const name = await dbUsersService.findWithToken('Users', req.header('api_key')).catch(error=>{
+        const {name} = await dbUsersService.findWithToken('Users', req.header('api_key')).catch(error=>{
             console.log(error);
             next();
         });
@@ -40,7 +39,7 @@ class ControllerDB{
             next();
         });
     }
-    async getUsers(req, res, next) {
+    async getModels(req, res, next) {
         dbService.findAll(collectionName).then(result=>{
             res.json(result);
         }).catch(error=>{
@@ -51,18 +50,19 @@ class ControllerDB{
 
     }
 
-    async getUser(req, res,next) {
+
+    async getModel(req, res, next) {
         const id = req.params.id;
         // const {id} = req.body;
         dbService.findOne(collectionName, id).then(result=>{
             res.json(result);
         }).catch(error=>{
-            next();
+            next(error);
             console.log(error);
         });
 
     }
-    async updateUser(req, res, next) {
+    async updateModel(req, res, next) {
         const id = req.params.id;
         dbService.update(collectionName, id, req.body).then(result=>{
             res.json(result);
@@ -71,7 +71,7 @@ class ControllerDB{
             next();
         });
     }
-    async deleteUser(req, res, next) {
+    async deleteModel(req, res, next) {
             const id = req.params.id;
             dbService.delete(collectionName, id).then(result=>{
                 res.json(result);

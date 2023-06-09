@@ -12,6 +12,9 @@ const router = require('./routes/api.routes')
 const routerCommentsDB = require('./routes/db.comments.routes')
 const routerUsersDB = require('./routes/db.users.routes')
 const routerModelsDB = require('./routes/db.models.routes')
+
+const errHandlerMiddleware = require('./middlewares/api.errorsHandler.middleware');
+
 const swaggerUI = require('swagger-ui-express')
 
 const swaggerJSDoc=require('swagger-jsdoc');
@@ -77,11 +80,12 @@ app.use(function (req, res, next) { // log every request
 // TODO: CRUD for models
 
 app.use(express.json())
-// app.use('/api', router)
+app.use('/api-old', router)
 app.use('/api/comments', routerCommentsDB);
 app.use('/api/users', routerUsersDB);
 app.use('/api/models', routerModelsDB);
 
+app.use(errHandlerMiddleware.error);
 
 
 app.all((req, res) =>{

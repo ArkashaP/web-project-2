@@ -18,7 +18,7 @@ class DbModelsService {
         })
     }
     async findAll(collectionName){
-        return await db.collection(collectionName).find({}).toArray();
+        return await db.collection(collectionName).find({}, {projection: {name:1}}).toArray();
     }
     async showCollections(){
         return await db.listCollections();

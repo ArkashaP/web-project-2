@@ -8,7 +8,6 @@ router.get('/comments', controller.getComments)
 router.post('/comments', controller.validateInput, controller.postComment)
 router.get('/stats', controller.getStats)
 
-
 module.exports = router;
 
 
