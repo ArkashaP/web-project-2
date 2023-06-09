@@ -7,15 +7,13 @@ class DBConfig{
 
             const uri = "mongodb://127.0.0.1:27017"
             const client = new mongoClient(uri, {
-
-
                     useNewUrlParser: true,
                     useUnifiedTopology: true
                 }
             );
             await client.connect();
             console.log('Connected to DB!!!!!!');
-            const db = client.db('Web-Project-2');
+            const db = client.db('Test');
             return db;
         }
         catch (error){

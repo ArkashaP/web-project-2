@@ -18,15 +18,13 @@ class UserExistenceMiddleware{
         
     };
     async checkApiKeyExistence(req, res, next){ // Token required
-        const {api_key} = req.body;
-        await dbUsersService.findWithToken('Users', api_key).then(result=> {
-            console.log(result);
+        await dbUsersService.findWithToken('Users', req.header('api_key')).then(result=> {
             if(!result){
-                const err = new Error("User does not exist! (Wrong api_key)")
-                err.status = 409; // TODO: Вписать правильные статусы
+                const err = new Error("User not found! (Wrong api_key)")
+                err.status = 401;
                 next(err);
-            }else{ 
-                next();
+            }else{
+                next()
             }
         }).catch(error=>{
             next(error);

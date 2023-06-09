@@ -24,7 +24,13 @@ class ControllerDB{
         const name = req.params.name;
         // const {name} = req.body;
         dbService.findWithName(collectionName, name).then((result=>{
-            res.json(result);
+            if(!result){
+                const err = new Error('User does not exist! (Wrong name)');
+                // TODO: Status!
+                next(err);
+            }else{
+                res.json(result);
+            }
         })).catch(error=>{
             console.log(error);
             next();

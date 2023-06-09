@@ -5,21 +5,31 @@ class ModelAccessMiddleware{
     async checkOwnerModel(req, res, next){ // Token required
         let nameFromUser;
         let nameFromModel;
+
         await dbUsersService.findWithToken('Users', req.header('api_key')).then(result=> {
-            nameFromUser = result["name"]
+            if(!result){
+                const err = new Error("User not found! (Wrong api_key)")
+                err.status = 401;
+                next(err);
+            } else {
+                nameFromUser = result["name"]
+            }
         }).catch(error=>{
-            const err = new Error("User not found! (Wrong api_key)")
-            err.status = 401;
-            next(err);
+            next(error);
         });
 
         const id = req.params.id;
         await dbModelsService.findOne('Models', id).then(result=> {
-            nameFromModel = result["name"]
+            if(!result){
+                const err = new Error("Model not found! (Wrong id)")
+                err.status = 404;
+                next(err);
+            } else {
+                nameFromModel = result["name"]
+
+            }
         }).catch(error=>{
-            const err = new Error("Model not found! (Wrong id)")
-            err.status = 404;
-            next(err);
+            next(error);
         });
 
         if(nameFromUser == nameFromModel && nameFromUser != undefined){

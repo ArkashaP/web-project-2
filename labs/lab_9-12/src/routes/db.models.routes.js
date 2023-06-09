@@ -6,19 +6,18 @@ const reqContentMiddleware = require('../middlewares/api.requestContent.middlewa
 const userCheckMiddleware = require('../middlewares/api.userCheck.middleware')
 
 router.get('/ping', controller.ping)
+// Read
 
 router.get('/', controller.getModels)
-
-
-
-// Check if this req have token (if no -> error)
-router.post('/', reqContentMiddleware.checkApiKey, userCheckMiddleware.checkApiKeyExistence, controller.postModel)
-
-// TODO: Secure, input (name, token) checks and create middlewares (for checks and etc)
-// router.use(modelAccessMiddleware.checkOwnerModel)
 router.get('/:id', controller.getModel)
 
-router.use('/:id', modelAccessMiddleware.checkOwnerModel)
+// Create
+router.use(reqContentMiddleware.checkApiKey) // Correct input (api_key)?
+router.use(userCheckMiddleware.checkApiKeyExistence) // User exists?
+router.post('/', controller.postModel)
+
+// Change\Delete
+router.use('/:id', modelAccessMiddleware.checkOwnerModel) // Is this the owner?
 router.put('/:id', controller.updateModel)
 router.delete('/:id', controller.deleteModel)
 

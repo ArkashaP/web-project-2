@@ -11,9 +11,10 @@ class ControllerDB{
 
     async postModel(req, res, next) {
         // const {comment, id} = req.
-        
-        
-        const {name} = await dbUsersService.findWithToken('Users', req.header('api_key')).catch(error=>{
+
+        await dbUsersService.findWithToken('Users', req.header('api_key')).then(result=>{
+
+        }).catch(error=>{
             console.log(error);
             next(error);
         });
@@ -54,6 +55,7 @@ class ControllerDB{
 
 
     async getModel(req, res, next) {
+        // TODO: Владелец видит всю инфу
         const id = req.params.id;
         // const {id} = req.body;
         dbService.findOne(collectionName, id).then(result=>{
